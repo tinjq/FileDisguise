@@ -10,7 +10,6 @@ namespace FileDisguise
 {
     public class FileContentDisguise
     {
-        public const string DISGUISE = "@DISGUISED@";
         public static int disguiseLength = 4;
         public static byte[] disguiseByte = new byte[] { 0x40, 0x44, 0x49, 0x53, 0x47, 0x55, 0x49, 0x53, 0x45, 0x44, 0x40 };
 

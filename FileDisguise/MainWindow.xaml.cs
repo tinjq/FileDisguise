@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -57,6 +58,11 @@ namespace FileDisguise
         {
             List<string> pathList = new List<string>();
             dragedPathList.ForEach(path => pathList.AddRange(FileNameDisguise.GetAllFiles(path, false)));
+            if (pathList.Count == 0)
+            {
+                MessageBox.Show("请先拖拽文件");
+                return;
+            }
 
             try
             {
@@ -70,27 +76,6 @@ namespace FileDisguise
         }
 
         /// <summary>
-        /// 还原文件类型
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        //private void RecoverType_Click(object sender, RoutedEventArgs e)
-        //{
-        //    List<string> pathList = new List<string>();
-        //    dragedPathList.ForEach(path => pathList.AddRange(FileNameDisguise.GetAllFiles(path, false)));
-
-        //    try
-        //    {
-        //        pathList.ForEach(x => FileContentDisguise.FileRecover(x, disguiseLength));
-        //        MessageBox.Show("成功");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message);
-        //    }
-        //}
-
-        /// <summary>
         /// 伪装文件名
         /// </summary>
         /// <param name="sender"></param>
@@ -99,6 +84,11 @@ namespace FileDisguise
         {
             List<string> pathList = new List<string>();
             dragedPathList.ForEach(path => pathList.AddRange(FileNameDisguise.GetAllFiles(path, true)));
+            if (pathList.Count == 0)
+            {
+                MessageBox.Show("请先拖拽文件");
+                return;
+            }
 
             try
             {
@@ -120,6 +110,11 @@ namespace FileDisguise
         {
             List<string> pathList = new List<string>();
             dragedPathList.ForEach(path => pathList.AddRange(FileNameDisguise.GetAllFiles(path, true)));
+            if (pathList.Count == 0)
+            {
+                MessageBox.Show("请先拖拽文件");
+                return;
+            }
 
             try
             {
@@ -162,5 +157,6 @@ namespace FileDisguise
                 default: return 1;
             }
         }
+
     }
 }
