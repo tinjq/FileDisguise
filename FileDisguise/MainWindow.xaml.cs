@@ -23,10 +23,33 @@ namespace FileDisguise
     {
         int disguiseLength = 1024 * 1024;
         List<string> dragedPathList = new List<string>();
+        public static byte[] IV = Encoding.UTF8.GetBytes("abcdef0123456789");
+        public static byte[] Key = Encoding.UTF8.GetBytes("123456789abcdef0");
+        public static string SettingsFilePath = Directory.GetCurrentDirectory() + "\\Settings";
 
         public MainWindow()
         {
             InitializeComponent();
+            //InitData();
+        }
+
+        private void InitData()
+        {
+            string currentDir = Directory.GetCurrentDirectory();
+            if (File.Exists(SettingsFilePath))
+            {
+                using (FileStream fileStream = new FileStream(SettingsFilePath, FileMode.Open, FileAccess.Read))
+                {
+                    StreamReader reader = new StreamReader(fileStream);
+                    string content = reader.ReadToEnd();
+                    Console.WriteLine(content);
+                }
+            } 
+            else
+            {
+                // 提示设置
+                ShowSettings();
+            }
         }
 
         private void txtFilePath_DragEnter(object sender, DragEventArgs e)
@@ -156,6 +179,17 @@ namespace FileDisguise
                 case "G": return 1024 * 1024 * 1024;
                 default: return 1;
             }
+        }
+
+        private void Settings_Click(object sender, RoutedEventArgs e)
+        {
+            ShowSettings();
+        }
+
+        private void ShowSettings()
+        {
+            Settings settings = new Settings();
+            settings.ShowDialog();
         }
 
     }

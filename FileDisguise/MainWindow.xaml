@@ -9,40 +9,53 @@
 
     <Window.Resources>
         <Style x:Key="ButtonStyle" TargetType="Button">
-            <Setter Property="Padding" Value="0 5"/>
+            <Setter Property="Padding" Value="5"/>
             <Setter Property="Margin" Value="5"/>
         </Style>
     </Window.Resources>
 
-    <Grid Margin="5">
-
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="4*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-
-        <Border Grid.Column="0" BorderBrush="Gray" BorderThickness="1"></Border>
-
-        <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center">
-            <ComboBox x:Name="comboBox" SelectionChanged="comboBox_SelectionChanged" Margin="5" IsEditable="False">
-                <ComboBox.ToolTip>
-                    <TextBlock Text="伪装长度，即改写文件的字节数" />
-                </ComboBox.ToolTip>
-                <ComboBoxItem Content="32B"/>
-                <ComboBoxItem Content="1K"/>
-                <ComboBoxItem Content="1M" IsSelected="True"/>
-                <ComboBoxItem Content="10M"/>
-                <ComboBoxItem Content="100M"/>
-                <ComboBoxItem Content="1G"/>
-            </ComboBox>
-            <Button Content="类型伪装/还原" Style="{StaticResource ButtonStyle}" Click="DisguiseType_Click" />
-            <!--<Button Content="类型还原" Style="{StaticResource ButtonStyle}" Click="RecoverType_Click" />-->
-            <Button Content="名称伪装" Style="{StaticResource ButtonStyle}" Click="DisguiseName_Click" />
-            <Button Content="名称还原" Style="{StaticResource ButtonStyle}" Click="RecoverName_Click" />
+    <Grid Margin="5 0 0 5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        
+        <StackPanel Grid.Row="0" HorizontalAlignment="Left" Margin="0 0 0 2">
+            <Button Content="设置" Style="{StaticResource ButtonStyle}" Padding="5 0" Margin="0" Click="Settings_Click" />
         </StackPanel>
 
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Padding="5">
-            <TextBlock x:Name="txtFilePath" AllowDrop="True" DragEnter="txtFilePath_DragEnter" Drop="txtFilePath_Drop" Text="拖动文件或目录至此区域"/>
-        </ScrollViewer>
+        <Grid Grid.Row="1">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" BorderBrush="Gray" BorderThickness="1">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Padding="5">
+                    <TextBlock x:Name="txtFilePath" AllowDrop="True" DragEnter="txtFilePath_DragEnter" Drop="txtFilePath_Drop" 
+                               Text="拖动文件或目录至此区域"/>
+                </ScrollViewer>
+            </Border>
+
+
+            <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center">
+                <ComboBox x:Name="comboBox" SelectionChanged="comboBox_SelectionChanged" Margin="5" Padding="5" IsEditable="False">
+                    <ComboBox.ToolTip>
+                        <TextBlock Text="伪装长度，即改写文件的字节数" />
+                    </ComboBox.ToolTip>
+                    <ComboBoxItem Content="64B"/>
+                    <ComboBoxItem Content="1K"/>
+                    <ComboBoxItem Content="1M" IsSelected="True"/>
+                    <ComboBoxItem Content="10M"/>
+                    <ComboBoxItem Content="100M"/>
+                    <ComboBoxItem Content="1G"/>
+                </ComboBox>
+                <Button Content="类型伪装/还原" Style="{StaticResource ButtonStyle}" Click="DisguiseType_Click" />
+                <!--<Button Content="类型还原" Style="{StaticResource ButtonStyle}" Click="RecoverType_Click" />-->
+                <Button Content="名称伪装" Style="{StaticResource ButtonStyle}" Click="DisguiseName_Click" />
+                <Button Content="名称还原" Style="{StaticResource ButtonStyle}" Click="RecoverName_Click" />
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>
